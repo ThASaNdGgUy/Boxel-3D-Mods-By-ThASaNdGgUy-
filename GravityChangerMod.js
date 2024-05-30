@@ -1,5 +1,3 @@
-Gravity Switcher Mod
-
 // ==UserScript==
 // @name         Gravity Changer Mod
 // @namespace    http://tampermonkey.net/
