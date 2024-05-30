@@ -1,5 +1,3 @@
-Boxel 3D 30 Second Mod
-
 // ==UserScript==
 // @name         Boxel 3D 30 Second Mod
 // @namespace    http://tampermonkey.net/
