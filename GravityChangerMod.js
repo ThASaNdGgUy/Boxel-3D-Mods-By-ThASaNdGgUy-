@@ -22,11 +22,13 @@
     }
 
     function changePlayerGravityClockwise() {
-        var newAngle = gravityTurns * (Math.PI / 2);
-        app.updateGravity(newAngle);
+        let newX = app.engine.gravity.y;
+        let newY = -app.engine.gravity.x;
+        app.engine.gravity.x = newX;
+        app.engine.gravity.y = newY;
     }
 
     document.addEventListener('keypress', changeGravity);
 
-    addModToList("Change Gravity Clockwise (Press G)");
+    addModToList("gravityChanger");
 })();
