@@ -1,5 +1,3 @@
-Infinite Jump Mod
-
 // ==UserScript==
 // @name         Boxel 3D Infinite Jump Mod
 // @namespace    http://tampermonkey.net/
