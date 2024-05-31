@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Boxel 3D Infinite Jump Mod
+// @name         Infinite Jump
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  Allows the player to jump infinitely with no cooldown
@@ -20,5 +20,5 @@
 
     addUpdateFunction(modifyJump);
 
-    addModToList("Infinite Jump");
+    addModToList("infinite Jump");
 })();
