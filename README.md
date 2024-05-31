@@ -35,4 +35,4 @@ I Don't Think Any Mods Needs Other Mods Other That The Api To Work But Ill Still
 
 2: Any Mods You Want
 
-Thx For Reading All Of This ANd I Hope You Have A Great Day! (Thx Charlieee1)
+Thx For Reading All Of This And I Hope You Have A Great Day! (Thx Charlieee1)
