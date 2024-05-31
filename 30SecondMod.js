@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Boxel 3D 30 Second Mod
+// @name         30 Second Mod
 // @namespace    http://tampermonkey.net/
 // @version      v1.0 Test
 // @description  A script that makes u die every 30 seconds
@@ -33,5 +33,5 @@
       startTimer(); 
       addUpdateFunction(checkPlayerDeath);
 
-    addModToList("30 Second Mod");
+    addModToList("30 Sec Mod");
 })();
