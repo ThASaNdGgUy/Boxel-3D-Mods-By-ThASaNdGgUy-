@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  Press G To Switch Gravity By 90 Degrees Clockwise
-// @author       ThASaNdGgUy
+// @author       ThASaNdGgUy ANd Charlieee1
 // @match        *dopplercreative.com/test/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
