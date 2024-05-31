@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Gravity Changer Mod
+// @name         Gravity Changer
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  Press G To Switch Gravity By 90 Degrees Clockwise
