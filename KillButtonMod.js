@@ -2,7 +2,7 @@
 // @name         Kill Button
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  Press K To Kill Yourself!
+// @description  Press K To Kill Yourself!!!
 // @author       ThASaNdGgUy
 // @match        *dopplercreative.com/test/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
