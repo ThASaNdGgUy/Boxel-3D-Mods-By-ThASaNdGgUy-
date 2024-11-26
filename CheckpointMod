@@ -2,7 +2,7 @@
 // @name         Checkpoint Mod
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  Place Checkpoints With U And TP To Them With J (SPRITES INCLUDED!!!)
+// @description  Place Checkpoints With U And TP To Them With J (SPRITES INCLUDED!!)
 // @author       ThASaNdGgUy
 // @match        *dopplercreative.com/test/*
 // @grant        none
