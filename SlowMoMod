@@ -2,7 +2,7 @@
 // @name         Slow Motion Toggle Mod
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  Press M To Make The Game Slow-Mo Mode.
+// @description  Press M To Make The Game Slow-Mo Mode!
 // @author       ThASaNdGgUy
 // @match        *dopplercreative.com/test/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
