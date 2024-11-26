@@ -1,0 +1,34 @@
+// ==UserScript==
+// @name         Slow Motion Toggle Mod
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Press M To Make The Game Slow-Mo Mode.
+// @author       ThASaNdGgUy
+// @match        *dopplercreative.com/test/*
+// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    let slowMotionEnabled = false;
+
+    function toggleSlowMotion(event) {
+        if (event.key === 'm' || event.key === 'M') {
+            slowMotionEnabled = !slowMotionEnabled;
+
+            if (slowMotionEnabled) {
+                app.engine.timing.timeScale = 0.5;
+                console.log("Slow motion enabled");
+            } else {
+                app.engine.timing.timeScale = 1.0;
+                console.log("Slow motion disabled");
+            }
+        }
+    }
+
+    document.addEventListener('keypress', toggleSlowMotion);
+
+    addModToList("Slow Motion Toggle");
+})();
