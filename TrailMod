@@ -1,0 +1,73 @@
+// ==UserScript==
+// @name         Trail Mod
+// @namespace    http://tampermonkey.net/
+// @version      1.6
+// @description  Adds A “Smooth Trail” Into The Game!
+// @author       ThASaNdGgUy
+// @match        *dopplercreative.com/test/*
+// @grant        none
+// ==/UserScript==
+
+let trailUrl = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjspiza_UWIAjkBcRwJh4p-7pu118ZGmoWzKBHniDa9D9609paRCS_TpyYBw7CYOx5JT1Jh6G9aKedGy3oYYLxz77vAyrnFIQNjV5lmBMA1TZFpjh-yc7HndErjcgH9tqn2i8Q-jZ8IvVE/s1600/rainbow.png";
+let trailSprites = [];
+let maxTrailSegments = 25;
+let trailSize = { width: 30, height: 20 };
+let fadeDuration = 1000;
+function createTrailSegment(position, angle) {
+    const trailSprite = document.createElement('img');
+    trailSprite.src = trailUrl;
+    trailSprite.style.position = 'absolute';
+    trailSprite.style.width = `${trailSize.width}px`;
+    trailSprite.style.height = `${trailSize.height}px`;
+    trailSprite.style.opacity = '0.25';
+    trailSprite.style.zIndex = '1';
+    trailSprite.style.transformOrigin = 'center';
+    trailSprite.style.transform = `rotate(${angle}deg)`;
+    trailSprites.push({ sprite: trailSprite, position, fadeStartTime: Date.now() });
+    document.body.appendChild(trailSprite);
+}
+
+function updateTrailSprites() {
+    const cameraPos = app.camera.position;
+
+    trailSprites.forEach((segment, index) => {
+        const screenX = (window.innerWidth / 2) + 2 * (segment.position.x - cameraPos.x);
+        const screenY = (window.innerHeight / 2) - 2 * (segment.position.y - cameraPos.y);
+
+        segment.sprite.style.left = `${screenX - trailSize.width / 2}px`;
+        segment.sprite.style.top = `${screenY - trailSize.height / 2}px`;
+
+        const timeElapsed = Date.now() - segment.fadeStartTime;
+
+        if (timeElapsed < fadeDuration) {
+            const opacity = 0.25 + (0.75 * (1 - (timeElapsed / fadeDuration)));
+            segment.sprite.style.opacity = opacity;
+        } else {
+            segment.sprite.remove();
+            trailSprites.splice(index, 1);
+        }
+    });
+}
+
+function addTrailSegment() {
+    const playerPos = { ...app.player.position };
+    const velocity = app.player.body.velocity;
+
+    const angle = Math.atan2(velocity.y, velocity.x) * (180 / Math.PI);
+
+    createTrailSegment({ ...playerPos }, angle);
+}
+
+function startTrail() {
+    addUpdateFunction(() => {
+        addTrailSegment();
+    });
+}
+
+function syncTrailWithCamera() {
+    updateTrailSprites();
+}
+
+addUpdateFunction(syncTrailWithCamera);
+startTrail();
+addModToList("Trail Mod");
