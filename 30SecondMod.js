@@ -2,7 +2,7 @@
 // @name         30 Second Mod
 // @namespace    http://tampermonkey.net/
 // @version      v1.0 Test
-// @description  A script that makes u die every 30 seconds
+// @description  A script that makes u die every 30 seconds!
 // @author       ThASaNdGgUy
 // @match        *dopplercreative.com/test/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
