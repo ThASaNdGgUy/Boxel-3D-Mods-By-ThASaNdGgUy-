@@ -1,0 +1,77 @@
+// ==UserScript==
+// @name         Checkpoint Mod
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Place Checkpoints With U And TP To Them With J (SPRITES INCLUDED!!!)
+// @author       ThASaNdGgUy
+// @match        *dopplercreative.com/test/*
+// @grant        none
+// ==/UserScript==
+
+let currentCheckpoint = null;
+let checkpointSpriteUrl = "https://tiermaker.com/images/media/template_images/2024/16814078/geometry-dash-geode-mods-tier-list-16814078/logo---2024-02-19t133400190.png";
+let checkpointSprite = null;
+let spriteWidth = 40;
+let spriteHeight = 40;
+
+function createCheckpoint() {
+    const playerPos = { ...app.player.position };
+    currentCheckpoint = {
+        x: playerPos.x,
+        y: playerPos.y,
+        z: playerPos.z
+    };
+    createCheckpointSprite();
+}
+
+function createCheckpointSprite() {
+    if (checkpointSprite) checkpointSprite.remove();
+    checkpointSprite = document.createElement('img');
+    checkpointSprite.src = checkpointSpriteUrl;
+    checkpointSprite.style.position = 'absolute';
+    checkpointSprite.style.width = `${spriteWidth}px`;
+    checkpointSprite.style.height = `${spriteHeight}px`;
+    checkpointSprite.style.zIndex = '10';
+    document.body.appendChild(checkpointSprite);
+    updateCheckpointSpritePosition();
+}
+
+function updateCheckpointSpritePosition() {
+    if (!checkpointSprite || !currentCheckpoint) return;
+    const cameraPos = app.camera.position;
+    const checkpointPos = currentCheckpoint;
+    const screenX = (window.innerWidth / 2) + 2 * (checkpointPos.x - cameraPos.x);
+    const screenY = (window.innerHeight / 2) - 2 * (checkpointPos.y - cameraPos.y);
+    checkpointSprite.style.left = `${screenX - spriteWidth / 2}px`;
+    checkpointSprite.style.top = `${screenY - spriteHeight / 2}px`;
+}
+
+function respawnAtCheckpoint() {
+    if (currentCheckpoint) {
+        app.player.setPosition({
+            x: currentCheckpoint.x,
+            y: currentCheckpoint.y,
+            z: currentCheckpoint.z
+        }, false);
+    }
+}
+
+const originalKill = app.player.kill;
+app.player.kill = function () {
+    originalKill.call(this);
+    setTimeout(() => {
+        respawnAtCheckpoint();
+    }, 1000);
+};
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "u") createCheckpoint();
+    else if (e.key === "j") respawnAtCheckpoint();
+});
+
+function syncSpriteWithCheckpoint() {
+    updateCheckpointSpritePosition();
+}
+
+addUpdateFunction(syncSpriteWithCheckpoint);
+addModToList("Checkpoint Mod");
