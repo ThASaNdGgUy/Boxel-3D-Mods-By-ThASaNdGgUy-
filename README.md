@@ -27,6 +27,8 @@ If You Wanna Create Your Own Mods, Follow These Instructions:
 
 4: Create Your Own Mod!
 
+5: Don't Use ChatGPT! Not Cool!
+
 # Order To Run The Mods:
 
 I Don't Think Any Mods Needs Other Mods Other That The Api To Work But Ill Still Do A Tree So You Will Know The Order To Put The Mods On.
