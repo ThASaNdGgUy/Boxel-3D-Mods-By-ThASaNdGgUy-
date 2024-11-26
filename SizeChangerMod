@@ -1,0 +1,65 @@
+// ==UserScript==
+// @name         Size Changer Mod
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Press 1 To Shrink And 2 To Grow! Press 3 to Toggle Size Limit.
+// @author       ThASaNdGgUy
+// @match        *dopplercreative.com/test/*
+// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @grant        none
+// ==/UserScript==
+
+const originalScale = { x: 16, y: 16, z: 16 };
+const minScale = { x: 8, y: 8, z: 8 };
+const maxScale = { x: 32, y: 32, z: 32 };
+
+let currentScale = { ...originalScale };
+let sizeLimitEnabled = true;
+
+function applySizeToPlayer(scale) {
+    app.player.setScale(scale);
+}
+
+function shrinkPlayer() {
+    if (sizeLimitEnabled && currentScale.x > minScale.x) {
+        currentScale.x /= 1.5;
+        currentScale.y /= 1.5;
+        currentScale.z /= 1.5;
+        applySizeToPlayer(currentScale);
+    } else if (!sizeLimitEnabled) {
+        currentScale.x /= 1.5;
+        currentScale.y /= 1.5;
+        currentScale.z /= 1.5;
+        applySizeToPlayer(currentScale);
+    }
+}
+
+function growPlayer() {
+    if (sizeLimitEnabled && currentScale.x < maxScale.x) {
+        currentScale.x *= 1.5;
+        currentScale.y *= 1.5;
+        currentScale.z *= 1.5;
+        applySizeToPlayer(currentScale);
+    } else if (!sizeLimitEnabled) {
+        currentScale.x *= 1.5;
+        currentScale.y *= 1.5;
+        currentScale.z *= 1.5;
+        applySizeToPlayer(currentScale);
+    }
+}
+
+function toggleSizeLimit() {
+    sizeLimitEnabled = !sizeLimitEnabled;
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === '1') {
+        shrinkPlayer();
+    } else if (e.key === '2') {
+        growPlayer();
+    } else if (e.key === '3') {
+        toggleSizeLimit();
+    }
+});
+
+addModToList('Size Changer Mod');
