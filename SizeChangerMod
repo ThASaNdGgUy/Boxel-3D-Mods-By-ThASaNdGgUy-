@@ -2,7 +2,7 @@
 // @name         Size Changer Mod
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  Press 1 To Shrink And 2 To Grow! Press 3 to Toggle Size Limit.
+// @description  Press 1 To Shrink And 2 To Grow! Press 3 to Toggle Size Limit!
 // @author       ThASaNdGgUy
 // @match        *dopplercreative.com/test/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
