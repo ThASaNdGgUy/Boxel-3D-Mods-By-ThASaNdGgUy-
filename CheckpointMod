@@ -1,14 +1,16 @@
 // ==UserScript==
 // @name         Checkpoint Mod
 // @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  Place Checkpoints With U And TP To Them With J (SPRITES INCLUDED!!)
+// @version      1.1
+// @description  Have The Powah Of Placing Checkpoints!
 // @author       ThASaNdGgUy
 // @match        *dopplercreative.com/test/*
 // @grant        none
 // ==/UserScript==
 
 let currentCheckpoint = null;
+let checkpointGravity = null;
+let checkpointCameraRotation = null;
 let checkpointSpriteUrl = "https://tiermaker.com/images/media/template_images/2024/16814078/geometry-dash-geode-mods-tier-list-16814078/logo---2024-02-19t133400190.png";
 let checkpointSprite = null;
 let spriteWidth = 40;
@@ -21,7 +23,51 @@ function createCheckpoint() {
         y: playerPos.y,
         z: playerPos.z
     };
+
+    checkpointGravity = {
+        x: app.engine.gravity.x,
+        y: app.engine.gravity.y
+    };
+
+    checkpointCameraRotation = getCameraRotationFromGravity();
+
     createCheckpointSprite();
+}
+
+function getCameraRotationFromGravity() {
+    if (app.engine.gravity.y > 0) {
+        return 0; // Normal gravity
+    } else if (app.engine.gravity.y < 0) {
+        return 180; // Reverse gravity
+    } else if (app.engine.gravity.x > 0) {
+        return 90; // Gravity to the right
+    } else if (app.engine.gravity.x < 0) {
+        return -90; // Gravity to the left
+    }
+    return 0; // Default rotation
+}
+
+function respawnAtCheckpoint() {
+    if (currentCheckpoint) {
+        app.player.setPosition({
+            x: currentCheckpoint.x,
+            y: currentCheckpoint.y,
+            z: currentCheckpoint.z
+        }, false);
+
+        if (checkpointGravity) {
+            app.engine.gravity.x = checkpointGravity.x;
+            app.engine.gravity.y = checkpointGravity.y;
+        }
+
+        if (checkpointCameraRotation !== null) {
+            setCameraRotation(checkpointCameraRotation);
+        }
+    }
+}
+
+function setCameraRotation(rotation) {
+    app.camera.rotation.z = (rotation * Math.PI) / 180; // Convert degrees to radians
 }
 
 function createCheckpointSprite() {
@@ -46,13 +92,16 @@ function updateCheckpointSpritePosition() {
     checkpointSprite.style.top = `${screenY - spriteHeight / 2}px`;
 }
 
-function respawnAtCheckpoint() {
+function removeLatestCheckpoint() {
     if (currentCheckpoint) {
-        app.player.setPosition({
-            x: currentCheckpoint.x,
-            y: currentCheckpoint.y,
-            z: currentCheckpoint.z
-        }, false);
+        currentCheckpoint = null;
+        checkpointGravity = null;
+        checkpointCameraRotation = null;
+
+        if (checkpointSprite) {
+            checkpointSprite.remove();
+            checkpointSprite = null;
+        }
     }
 }
 
@@ -65,8 +114,9 @@ app.player.kill = function () {
 };
 
 document.addEventListener("keydown", (e) => {
-    if (e.key === "u") createCheckpoint();
-    else if (e.key === "j") respawnAtCheckpoint();
+    if (e.key === "z") createCheckpoint();
+    else if (e.key === "c") respawnAtCheckpoint();
+    else if (e.key === "x") removeLatestCheckpoint();
 });
 
 function syncSpriteWithCheckpoint() {
