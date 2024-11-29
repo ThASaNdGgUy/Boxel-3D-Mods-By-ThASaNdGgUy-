@@ -27,7 +27,7 @@ If You Wanna Create Your Own Mods, Follow These Instructions:
 
 4: Create Your Own Mod!
 
-5: Don't Use ChatGPT! Not Cool!
+5: Don't Use ChatGPT To Write EVERYTHING FOR YOU! Not Cool!
 
 # Order To Run The Mods:
 
